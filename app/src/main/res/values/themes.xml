@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <!-- Base application theme (Light Mode). -->
+  <style name="Theme.Dummy" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Primary brand color. -->
+    <item name="colorPrimary">@color/light_primary</item>
+    <item name="colorPrimaryVariant">@color/light_primary_dark</item>
+    <item name="colorOnPrimary">@color/light_on_primary</item>
+    <!-- Secondary brand color. -->
+    <item name="colorSecondary">@color/light_secondary</item>
+    <item name="colorSecondaryVariant">@color/light_secondary</item> <!-- Often same as secondary -->
+    <item name="colorOnSecondary">@color/light_on_secondary</item>
+    <!-- Status bar color. -->
+    <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    <!-- Background/Surface colors -->
+    <item name="android:colorBackground">@color/light_background</item>
+    <item name="colorSurface">@color/light_surface</item>
+    <item name="colorOnBackground">@color/light_on_background</item>
+    <item name="colorOnSurface">@color/light_on_surface</item>
+  </style>
+</resources>

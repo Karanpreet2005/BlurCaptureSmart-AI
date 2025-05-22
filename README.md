@@ -115,14 +115,13 @@ Custom image analyzer for real-time frame processing
 
 ## 📊 Performance Metrics
 
-| Metric                    | Value                            |
-|---------------------------|----------------------------------|
-| Blur Detection Accuracy   | 94% correlation w/ human ratings |
-| ISO Recommendation        | 87% match to expert choices      |
-| Shutter Speed Accuracy    | 92% within 1-stop of optimal     |
-| On-Device Analysis Time   | < 100ms per frame                |
-| API Round-Trip Time       | < 500ms                          |
-| Battery Overhead          | < 5%                             |
+| Metric                    | Value                                 |
+|---------------------------|---------------------------------------|
+| Blur Detection Accuracy   | 94% correlation w/ human ratings      |
+| ISO Recommendation        | 87% match to expert choices           |
+| Shutter Speed Accuracy    | 92% within 1-stop of optimal          |
+| On-Device Analysis Time   | < 100ms per frame                     |
+| API Round-Trip Time       | < 80-90ms(For locally hosted server)  |
 
 ---
 
@@ -181,7 +180,7 @@ def composite_blur_score(image):
 - 
 ### Server Setup
 ```bash
-git clone https://github.com/your-repo/capsmartai.git
+git clone https://github.com/Karanpreet2005/BlurCaptureSmart-AI.git
 cd capsmartai
 pip install -r requirements.txt
 python settings_api.py

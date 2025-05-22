@@ -66,22 +66,28 @@ class HeatmapActivity : BaseDrawerActivity() { // Inherit from BaseDrawerActivit
                     val orientation = getOrientationFromUri(imageUri)
                     val rotatedBitmap = rotateBitmap(originalBitmap, orientation)
                     Log.d(TAG, "Original Orientation: $orientation. Bitmap rotated.")
-                    // --- End Rotation Logic ---
+                    
+                    // Use a background thread for image compression
+                    Thread {
+                        try {
+                            // Convert the *rotated* bitmap to JPEG byte array
+                            val outputStream = ByteArrayOutputStream()
+                            rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
+                            val imageBytes = outputStream.toByteArray()
 
-                    // Convert the *rotated* bitmap to JPEG byte array
-                    val outputStream = ByteArrayOutputStream()
-                    // Use the rotatedBitmap here
-                    rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, outputStream)
-                    val imageBytes = outputStream.toByteArray()
+                            if (imageBytes.isEmpty()) {
+                                runOnUiThread { showError("Failed to convert rotated bitmap to bytes.") }
+                                return@Thread
+                            }
 
-                    if (imageBytes.isEmpty()) {
-                        showError("Failed to convert rotated bitmap to bytes.")
-                        return
-                    }
-
-                    Log.d(TAG, "Rotated bitmap loaded and converted to ${imageBytes.size} bytes. Requesting heatmap...")
-                    requestHeatmapGeneration(imageBytes) // Send the bytes of the rotated bitmap
-
+                            Log.d(TAG, "Rotated bitmap loaded and converted to ${imageBytes.size} bytes. Requesting heatmap...")
+                            // Call API on background thread
+                            requestHeatmapGeneration(imageBytes)
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error processing image: ${e.message}", e)
+                            runOnUiThread { showError("Error processing image.") }
+                        }
+                    }.start()
                 } else {
                     Log.e(TAG, "Failed to load bitmap from URI.")
                     showError("Failed to load image.")

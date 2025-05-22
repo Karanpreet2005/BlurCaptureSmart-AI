@@ -155,24 +155,25 @@ def tenengrad_score(image):
 # === ISO Biasing Logic (Using user-provided logic) ===
 def apply_iso_bias(predicted_iso, confidence):
     # Using the exact function provided by the user
-    # if predicted_iso > 2500:
-    #     biased_iso = 2500
-    # elif predicted_iso in [2000, 2500] and confidence < 0.90:
-    #     biased_iso = 1000
-    # elif predicted_iso == 1600 and confidence < 0.85:
-    #     biased_iso = 800
-    # elif predicted_iso == 1250 and confidence < 0.7:
-    #     biased_iso = 640
-    # elif predicted_iso == 1000 and confidence < 0.7:
-    #     biased_iso = 500
-    # elif predicted_iso == 800 and confidence < 0.65:
-    #     biased_iso = 400
-    # elif predicted_iso == 640 and confidence < 0.65:
-    #     biased_iso = 250
-    # elif predicted_iso == 500 and confidence < 0.6:
-    #     biased_iso = 125
-    # else:
-    biased_iso = predicted_iso+ 600
+    if predicted_iso > 2500:
+        biased_iso = 2500
+    elif predicted_iso in [2000, 2500] and confidence < 0.90:
+        biased_iso = 1000
+    elif predicted_iso == 1600 and confidence < 0.85:
+        biased_iso = 800
+    elif predicted_iso == 1250 and confidence < 0.7:
+        biased_iso = 640
+    elif predicted_iso == 1000 and confidence < 0.7:
+        biased_iso = 500
+    elif predicted_iso == 800 and confidence < 0.65:
+        biased_iso = 400
+    elif predicted_iso == 640 and confidence < 0.65:
+        biased_iso = 250
+    elif predicted_iso == 500 and confidence < 0.6:
+        biased_iso = 125
+    else:
+        biased_iso = predicted_iso
+    
     logger.debug(f"ISO Biasing - Raw: {predicted_iso}, Confidence: {confidence:.4f}, Biased: {biased_iso}")
     return biased_iso
 
